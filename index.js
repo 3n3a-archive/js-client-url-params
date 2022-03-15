@@ -94,7 +94,7 @@ if (hasParams && params.hasOwnProperty('body')) {
         '#' +
         'body=b64_' +
         safeBtoA(body) +
-        (head ? '&head=b64_' + head : '');
+        (head ? '&head=b64_' + safeBtoA(head) : '');
 
       document.body.insertAdjacentHTML(
         'beforeend',
