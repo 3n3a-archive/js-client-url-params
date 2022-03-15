@@ -57,9 +57,11 @@ function safeBtoA(string) {
 }
 
 function safeAtoB(string) {
-  return atob(string)
-    .replace(/\-/g, '+') // Convert '-' to '+'
-    .replace(/\_/g, '/') // Convert '_' to '/'
+  return atob(
+    string
+      .replace(/\-/g, '+') // Convert '-' to '+'
+      .replace(/\_/g, '/') // Convert '_' to '/'
+  );
 }
 
 //location.hash = '#body=mome&head=value';
