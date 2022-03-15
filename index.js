@@ -90,7 +90,8 @@ if (hasParams && params.hasOwnProperty('body')) {
     if (body) {
       let url =
         location.origin +
-        '/#' +
+        location.pathname +
+        '#' +
         'body=b64_' +
         safeBtoA(body) +
         (head ? '&head=b64_' + head : '');
