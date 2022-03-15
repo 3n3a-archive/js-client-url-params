@@ -17,15 +17,18 @@ class ClientParameters {
     let params = [];
     for (const param of paramsEncoded) {
       const [key, value] = param.split('=');
-      params.push({ key: key, value: value });
+      params.push({ key: decodeURI(key), value: decodeURI(value) });
     }
 
     return params;
   }
 }
 
-location.hash = '#your=mome&is=value';
+// location.hash = '#your=mome&is=value';
 let c = new ClientParameters();
-for(const param of c.getParams()) {
-  document.body.insertAdjacentHTML('beforeend', `<p>${param.key} = ${param.value}</p>`)
+for (const param of c.getParams()) {
+  document.body.insertAdjacentHTML(
+    'beforeend',
+    `<p>${param.key} = ${param.value}</p>`
+  );
 }
