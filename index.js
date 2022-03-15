@@ -14,9 +14,9 @@ class ClientParameters {
    */
   getParams() {
     let path = location.hash.split('#')[1];
-    if (path == '') return Null;
+    if (path == '') return null;
     let paramsEncoded = path.split('&');
-    let params = [];
+    let params = {};
     for (const param of paramsEncoded) {
       let [key, value] = param.split('=');
 
@@ -25,18 +25,23 @@ class ClientParameters {
         value = atob(value);
       }
 
-      params.push({ key: decodeURI(key), value: value });
+      params[decodeURI(key)] = value
     }
 
     return params;
   }
 }
 
-// location.hash = '#your=mome&is=value';
-let c = new ClientParameters();
-for (const param of c.getParams()) {
-  document.body.insertAdjacentHTML(
-    'beforeend',
-    `<p>${param.key} = ${param.value}</p>`
-  );
+function outputAllParams(params) {
+  for (const key of Object.keys(params)) {
+    document.body.insertAdjacentHTML(
+      'beforeend',
+      `<p>${key} = ${params[key]}</p>`
+    );
+  }
 }
+
+location.hash = '#content=mome&is=value';
+let c = new ClientParameters();
+let params = c.getParams();
+outputAllParams(params);
