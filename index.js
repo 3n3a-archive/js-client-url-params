@@ -22,7 +22,7 @@ class ClientParameters {
 
       if (value.includes('b64_')) {
         value = value.replace('b64_', '');
-        value = atob(value);
+        value = safeAtoB(value);
       }
 
       params[decodeURI(key)] = value;
@@ -54,6 +54,12 @@ function safeBtoA(string) {
     .replace(/\+/g, '-') // Convert '+' to '-'
     .replace(/\//g, '_') // Convert '/' to '_'
     .replace(/=+$/, ''); // Remove ending '='
+}
+
+function safeAtoB(string) {
+  return atob(string)
+    .replace(/\-/g, '+') // Convert '-' to '+'
+    .replace(/\_/g, '/') // Convert '_' to '/'
 }
 
 //location.hash = '#body=mome&head=value';
