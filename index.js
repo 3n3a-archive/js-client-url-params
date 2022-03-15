@@ -49,9 +49,8 @@ function renderContent(body, head = null) {
 }
 
 // urlsafe b64
-function encode(buffer) {
-  return buffer
-    .toString('base64')
+function safeBtoA(string) {
+  return btoa(string)
     .replace(/\+/g, '-') // Convert '+' to '-'
     .replace(/\//g, '_') // Convert '/' to '_'
     .replace(/=+$/, ''); // Remove ending '='
@@ -93,7 +92,7 @@ if (hasParams && params.hasOwnProperty('body')) {
         location.origin +
         '/#' +
         'body=b64_' +
-        encode(body) +
+        safeBtoA(body) +
         (head ? '&head=b64_' + head : '');
 
       document.body.insertAdjacentHTML(
